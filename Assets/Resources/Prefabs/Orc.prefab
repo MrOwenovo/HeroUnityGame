@@ -226,5 +226,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  knockbackForce: 100
+  knockbackForce: 5000
   attactPower: 1
