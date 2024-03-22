@@ -38,9 +38,10 @@ public class OrcMovement : MonoBehaviour
         {
             Vector2 direction = collider.transform.position - transform.position;
             Vector2 force = direction.normalized * knockbackForce;
-
-            damageable.OnHit(attactPower, force);
-
+            
+            OnFire();
+            // damageable.OnHit(attactPower, force);
+    
         }
     }
 
@@ -53,7 +54,10 @@ public class OrcMovement : MonoBehaviour
     {
         animator.SetBool("isWalking",false);
     }
-
+    void OnFire()
+    {
+        animator.SetTrigger("swordAttack");
+    }
     public void OnDamage()
     {
         animator.SetTrigger("isDamage");
@@ -63,6 +67,10 @@ public class OrcMovement : MonoBehaviour
     public void OnDamageOver()
     {
         animator.SetTrigger("isDamage");
+    }
+    public void OnAttackOver()
+    {
+        animator.SetTrigger("swordAttack");
     }
 
     public void OnDie()
@@ -83,12 +91,15 @@ public class OrcMovement : MonoBehaviour
                 if (direction.x > 0)
                 {
                     spriteRenderer.flipX = false;
+                    gameObject.BroadcastMessage("IsFacingRight",true);
 
                 }
 
                 if (direction.x <0)
                 {
                     spriteRenderer.flipX = true;
+                    gameObject.BroadcastMessage("IsFacingRight",false);
+
                 }
                
                 OnWalk();
