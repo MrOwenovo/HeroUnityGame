@@ -13,7 +13,9 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
     
     private int totalAmount = 2;
     bool isGameWon = true;
+    public GameObject failureMenuUI;
 
+    
     bool targetable;
     public event Action OnDeath;
 
@@ -70,6 +72,11 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
 
                     }
                 }
+                if (gameObject.CompareTag("Player"))
+                {
+                   Debug.Log("Failure");
+                   FailureGame();
+                }
             }
             else
             {
@@ -98,6 +105,11 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
 
             }
         }
+    }
+    public void FailureGame()
+    {
+        failureMenuUI.SetActive(true);
+        Time.timeScale = 0f; // 暂停游戏
     }
     private void Awake()
     {

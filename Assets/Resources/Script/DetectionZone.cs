@@ -26,8 +26,8 @@ public class DetectionZone : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position,viewRadius);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(transform.position,viewRadius);
+    // }
 }

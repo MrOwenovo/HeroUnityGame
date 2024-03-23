@@ -15,6 +15,12 @@ public class ObstacleSpawner : MonoBehaviour
         SpawnObstacles(GameAssets.Instance.WreckableObstacle, wreckableObstacleCount);
     }
 
+    public void GenerateAllObstacles()
+    {
+        SpawnObstacles(GameAssets.Instance.NonDesObstacle, nonDesObstacleCount);
+        SpawnObstacles(GameAssets.Instance.WreckableObstacle, wreckableObstacleCount);
+    }
+
     private void SpawnObstacles(Transform obstaclePrefab, int count)
     {
         HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();

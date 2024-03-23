@@ -92,14 +92,17 @@
     <Compile Include="Assets\Resources\Script\HealthDisplay.cs" />
     <Compile Include="Assets\Resources\Script\OrcMovement.cs" />
     <Compile Include="Assets\Resources\Script\PlayerMovement.cs" />
+    <Compile Include="Assets\Resources\Script\CooldownDisplay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\Resources\Script\PlayerMissileController.cs" />
     <Compile Include="Assets\Resources\Script\PauseMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Resources\Script\EnemyManager.cs" />
     <Compile Include="Assets\Resources\Script\MenuController.cs" />
+    <Compile Include="Assets\Resources\Script\WinMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Resources\Script\DetectionZone.cs" />
     <Compile Include="Assets\Testing.cs" />

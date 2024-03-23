@@ -139,9 +139,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5480016044871289677, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
+      propertyPath: viewRadius
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6500835328923097723, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
       propertyPath: m_Name
       value: Orc Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500835328923097723, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
+      propertyPath: m_TagString
+      value: Orc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2453924643816330460, guid: e07ef0a882df280408464e42ac7c3834, type: 3}
+      propertyPath: missilePrefab
+      value: 
+      objectReference: {fileID: 5982230383359858080, guid: 296275809e527864da9cfe988bf8125b, type: 3}
+    - target: {fileID: 2453924643816330460, guid: e07ef0a882df280408464e42ac7c3834, type: 3}
+      propertyPath: playerMissilePrefab
+      value: 
+      objectReference: {fileID: 5982230383359858080, guid: f10cfeaacfda3874ea8e69fa8de090e5, type: 3}
     - target: {fileID: 3461732411551727664, guid: e07ef0a882df280408464e42ac7c3834, type: 3}
       propertyPath: health
       value: 30

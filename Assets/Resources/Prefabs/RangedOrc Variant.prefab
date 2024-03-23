@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedOrc Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1830489193054002407, guid: f63a01aea0c0a4a499380a5e385308e5, type: 3}
+      propertyPath: m_TagString
+      value: Orc
+      objectReference: {fileID: 0}
     - target: {fileID: 4614571265022314300, guid: f63a01aea0c0a4a499380a5e385308e5, type: 3}
       propertyPath: idealRange
       value: 10
