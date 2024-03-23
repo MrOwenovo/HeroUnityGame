@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3461732411551727664, guid: e07ef0a882df280408464e42ac7c3834, type: 3}
       propertyPath: health
-      value: 10
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461732411551727664, guid: e07ef0a882df280408464e42ac7c3834, type: 3}
+      propertyPath: enemyType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4508907935054795599, guid: e07ef0a882df280408464e42ac7c3834, type: 3}
       propertyPath: m_Name

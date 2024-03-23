@@ -15,6 +15,7 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
     bool isGameWon = true;
 
     bool targetable;
+    public event Action OnDeath;
 
     public enum EnemyType
     {
@@ -30,7 +31,7 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
         set
         {
             health = value;
-
+            
             if (health <= 0)
             {
                 gameObject.BroadcastMessage("OnDie");
@@ -51,6 +52,7 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
                         case EnemyType.Obstacle:
                             scoreToAdd = 0;
                             break;
+                      
                     }
                     mainUiController.AddScore(scoreToAdd);
                 }
@@ -72,6 +74,13 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
             else
             {
                 gameObject.BroadcastMessage("OnDamage");
+            }
+            
+            // 更新 HealthDisplay，仅当此 DamageableCharacter 是玩家时
+            if (gameObject.CompareTag("Player"))
+            {
+                Debug.Log("damage:"+health);
+                HealthDisplay.UpdateHealth(health);
             }
         }
     }
@@ -100,12 +109,15 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
     public void OnDying()
     {
         Targetable = false;
+        OnDeath?.Invoke();
         
     }
     public void OnHit(int damage, Vector2 knockback)
     {
         Health -= damage;
         rb.AddForce(knockback);
+        
+
     }
 
     public void OnObjectDestroyed()
