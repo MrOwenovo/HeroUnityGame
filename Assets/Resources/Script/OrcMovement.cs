@@ -14,6 +14,8 @@ public class OrcMovement : MonoBehaviour
     DetectionZone detectionZone;
     public float knockbackForce;
     public int attactPower;
+    public LayerMask obstacleLayer;
+
     
 
 
@@ -24,7 +26,6 @@ public class OrcMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         detectionZone = GetComponent<DetectionZone>();
         
-            // transform.Find("DetectZone").GetComponent<DetectionZone>();
         
         
         
@@ -78,40 +79,53 @@ public class OrcMovement : MonoBehaviour
         animator.SetTrigger("isDead");
         
     }
+    
+    private Vector2 GetMoveDirection()
+    {
+        if (detectionZone.detectedObjs != null)
+        {
+            Vector2 targetDirection = (detectionZone.detectedObjs.transform.position - transform.position).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection, detectionZone.viewRadius, obstacleLayer);
+            if (hit.collider != null)
+            {
+                Vector2 avoidanceDirection = Vector2.Perpendicular(targetDirection).normalized;
+                return avoidanceDirection;
+            }
+            return targetDirection;
+        }
+        return Vector2.zero;
+    }
+
+    private void UpdateOrientation(Vector2 moveDirection)
+    {
+        if (moveDirection.x > 0)
+        {
+            spriteRenderer.flipX = false;
+            gameObject.BroadcastMessage("IsFacingRight", true);
+        }
+        else if (moveDirection.x < 0)
+        {
+            spriteRenderer.flipX = true;
+            gameObject.BroadcastMessage("IsFacingRight", false);
+        }
+    }
 
     
     private void FixedUpdate()
     {
-        if (detectionZone.detectedObjs != null)
+        Vector2 moveDirection = GetMoveDirection();
+        if (moveDirection != Vector2.zero)
         {
-            Vector2 direction = (detectionZone.detectedObjs.transform.position - transform.position);
-            if (direction.magnitude <= detectionZone.viewRadius)
-            {
-                rb.AddForce(direction.normalized * speed);
-                if (direction.x > 0)
-                {
-                    spriteRenderer.flipX = false;
-                    gameObject.BroadcastMessage("IsFacingRight",true);
-
-                }
-
-                if (direction.x <0)
-                {
-                    spriteRenderer.flipX = true;
-                    gameObject.BroadcastMessage("IsFacingRight",false);
-
-                }
-               
-                OnWalk();
-            }
-            else
-            {
-                OnWalkStop();
-            }
+            rb.AddForce(moveDirection * speed);
+            UpdateOrientation(moveDirection);
+            OnWalk();
         }
-        
+        else
+        {
+            OnWalkStop();
+        }
     }
-    
+
 
     // Start is called before the first frame update
     void Start()

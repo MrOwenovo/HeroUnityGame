@@ -1,48 +1,127 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject meleeEnemyPrefab; // 近战敌人预制体
-    public int maxEnemies = 10; // 最大敌人数量
-    private List<GameObject> enemies = new List<GameObject>(); // 存储当前场景中的敌人
-    public float spawnRadius = 10.5f; // 生成半径，确保和障碍物生成的范围一致
-    public LayerMask obstacleLayer; // 障碍物层，用于检测生成位置是否有效
-    private float gameTimer = 30f; // 游戏时间，30秒后胜利
+    public GameObject meleeEnemyPrefab;
+    public int maxEnemies = 10;
+    private List<GameObject> enemies = new List<GameObject>();
+    public float spawnRadius = 9.5f;
+    public LayerMask obstacleLayer;
+    private float gameTimer = 30f;
     
-    public GameObject rangedEnemyPrefab; // 远程敌人预制体
+    public GameObject rangedEnemyPrefab;
     private int currentMeleeEnemies = 0;
     private int currentRangedEnemies = 0;
-    private int round = 1; // 当前游戏轮次
+    private int round = 1;
     
     public GameObject winMenuUI;
    
     public void WinGame()
     {
         winMenuUI.SetActive(true);
-        Time.timeScale = 0f; // 暂停游戏
+        Time.timeScale = 0f;
+
+        var mainUiController = FindObjectOfType<MainController>();
+        if (mainUiController != null)
+        {
+            int currentScore = mainUiController.GetCurrentScore();
+            string gameDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            RankingEntry newEntry = new RankingEntry(gameDateTime, currentScore);
+            RankingManager.SaveRanking(newEntry);
+        }
     }
+
 
     void Start()
     {
-        // 第一轮开始时生成15个近战敌人
-        for (int i = 0; i < 15; i++)
+        StartCoroutine(GameRound());
+    }
+    IEnumerator GameRound()
+    {
+        if (round == 1)
         {
-            SpawnEnemy(true); // 传递 true 表示生成近战敌人
+            for (int i = 0; i < 10; i++) SpawnEnemy(true);
         }
 
-        StartCoroutine(CheckWinCondition());
+        yield return new WaitForSeconds(gameTimer);
+        Debug.Log("Round 1 ends");
+
+        if (round == 1)
+        {
+            StartRoundTwo();
+            Debug.Log("Round 2 starts");
+            yield return new WaitForSeconds(gameTimer);
+            Debug.Log("Round 2 ends");
+        }
+
+        CheckEndGameCondition();
+    }
+    void CheckEndGameCondition()
+    {
+        DamageableCharacter player = FindObjectOfType<DamageableCharacter>();
+        if (player != null && player.Health > 0)
+        {
+            WinGame();
+        }
+        else
+        {
+            Debug.Log("Game Over. Player died.");
+        }
     }
 
+    void StartRoundTwo()
+    {
+        ClearEnemies(); 
 
+        ObstacleSpawner obstacleSpawner = FindObjectOfType<ObstacleSpawner>();
+        if (obstacleSpawner != null)
+        {
+            obstacleSpawner.GenerateAllObstacles(); // 使用新的公共方法
+        }
+        else
+        {
+            Debug.LogError("ObstacleSpawner instance not found.");
+        }
+        
+        round = 2;
+        for (int i = 0; i < 10; i++)
+        {
+            SpawnEnemy(true);
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            SpawnEnemy(false);
+        }
+
+        ResetPlayerHealth();
+    }
+
+    void ResetPlayerHealth()
+    {
+        DamageableCharacter player = FindObjectOfType<DamageableCharacter>();
+        if (player != null && player.CompareTag("Player"))
+        {
+            player.Health = 30;
+            player.health = 30;
+            HealthDisplay.UpdateHealth(30);
+        }
+    }
 
 
     public void SpawnEnemy(bool isMelee)
     {
+        if ((isMelee && currentMeleeEnemies >= (round == 1 ? 10 : 15)) || (!isMelee && currentRangedEnemies >= 5))
+        {
+            return; 
+        }
+
         GameObject prefab = isMelee ? meleeEnemyPrefab : rangedEnemyPrefab;
         Vector2 spawnPoint;
-        bool canSpawn = false;
+        bool canSpawn;
         do
         {
             spawnPoint = (Vector2)transform.position + Random.insideUnitCircle * spawnRadius;
@@ -67,66 +146,55 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator RespawnEnemy(bool isMelee)
     {
-        yield return new WaitForSeconds(isMelee ? 2f : 4f); // 近战敌人2秒重生，远程敌人4秒重生
+        yield return new WaitForSeconds(isMelee ? 2f : 4f);
 
-        if ((isMelee && currentMeleeEnemies < 10) || (!isMelee && currentRangedEnemies < 5))
+        if (round == 2)
         {
-            SpawnEnemy(isMelee);
+            if (isMelee && currentMeleeEnemies < 15)
+            {
+                SpawnEnemy(true);
+            }
+            else if (!isMelee && currentRangedEnemies < 5)
+            {
+                SpawnEnemy(false);
+            }
         }
     }
-
-    void StartRoundTwo()
-    {
-        ClearEnemies(); // 清除所有敌人
-
-        // 获取 ObstacleSpawner 实例并调用其公共方法来重新生成障碍物
-        ObstacleSpawner obstacleSpawner = FindObjectOfType<ObstacleSpawner>();
-        if (obstacleSpawner != null)
-        {
-            obstacleSpawner.GenerateAllObstacles(); // 使用新的公共方法
-        }
-        else
-        {
-            Debug.LogError("ObstacleSpawner instance not found.");
-        }
-
-        // 生成第二轮的敌人
-        round = 2; // 更新轮次标记
-        for (int i = 0; i < 10; i++) // 生成10个近战敌人
-        {
-            SpawnEnemy(true);
-        }
-        for (int i = 0; i < 5; i++) // 生成5个远程敌人
-        {
-            SpawnEnemy(false);
-        }
-    }
+    
 
 
     void ClearEnemies()
     {
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Orc"))
+        foreach (GameObject enemy in enemies)
         {
             Destroy(enemy);
         }
-        // 重置敌人计数
+        enemies.Clear();
         currentMeleeEnemies = 0;
         currentRangedEnemies = 0;
     }
 
+
     IEnumerator CheckWinCondition()
     {
-        yield return new WaitForSeconds(gameTimer); // 等待第一轮游戏时间结束
+        yield return new WaitForSeconds(gameTimer);
 
         if (round == 1)
         {
             StartRoundTwo();
+            yield return new WaitForSeconds(gameTimer);
+        }
+
+        DamageableCharacter player = FindObjectOfType<DamageableCharacter>();
+        if (player != null && player.Health > 0)
+        {
+            WinGame();
         }
         else
         {
-            Debug.Log("Win!"); // 第二轮结束，游戏胜利
-            WinGame();
+            Debug.Log("Game Over");
         }
     }
+
 
 }

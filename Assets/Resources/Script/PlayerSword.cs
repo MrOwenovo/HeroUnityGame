@@ -37,7 +37,7 @@ public class PlayerSword : MonoBehaviour
             Vector3 _position = transform.parent.position;
             Vector2 direction = collider.transform.position - _position;
 
-            attackPower = 1;
+            attackPower = 2;
             bool isCritical = Random.Range(0, 100) < 30;
             if (isCritical)
             {

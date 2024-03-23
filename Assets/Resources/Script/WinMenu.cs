@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // 引入场景管理
+using UnityEngine.SceneManagement;
 
 public class WinMenu : MonoBehaviour
 {

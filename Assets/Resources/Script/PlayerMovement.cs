@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
 
     private Vector2 moveInput;
-    public GameObject playerMissilePrefab; // 导弹预制体
+    public GameObject playerMissilePrefab;
     private PauseMenu pauseMenu;
 
-    private Vector2 lastMoveDirection = Vector2.right; // 默认向右
+    private Vector2 lastMoveDirection = Vector2.right;
     public float meleeCooldownTime = 2f;
     public float missileCooldownTime = 0.5f;
     public float meleeCooldown;
@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        // 找到暂停菜单的引用
         pauseMenu = FindObjectOfType<PauseMenu>();
         
         
@@ -37,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         if (meleeCooldown > 0) meleeCooldown -= Time.deltaTime;
         if (missileCooldown > 0) missileCooldown -= Time.deltaTime;
 
-        // 其他 Update 逻辑...
     }
     
 
@@ -66,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = value.Get<Vector2>();
         if (input != Vector2.zero)
         {
-            lastMoveDirection = input; // 更新最后的移动方向
+            lastMoveDirection = input;
         }
     }
     void OnFire()
@@ -74,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         if ( meleeCooldown <= 0)
         {
             animator.SetTrigger("swordAttack");
-            meleeCooldown = meleeCooldownTime; // 重置远程攻击的CD
+            meleeCooldown = meleeCooldownTime;
         }
     }
 
@@ -107,13 +105,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (value.isPressed && missileCooldown <= 0)
         {
-            LaunchMissile(lastMoveDirection); // 使用最后的移动方向发射导弹
-            missileCooldown = missileCooldownTime; // 重置远程攻击的CD
+            LaunchMissile(lastMoveDirection);
+            missileCooldown = missileCooldownTime;
         }
     }
     private void LaunchMissile(Vector2 direction)
     {
-        // 根据玩家的移动方向来发射导弹
         Vector3 launchDirection = new Vector3(direction.x, direction.y, 0).normalized;
         GameObject missile = Instantiate(playerMissilePrefab, transform.position + launchDirection * 0.5f, Quaternion.identity);
         missile.GetComponent<PlayerMissileController>().Launch(launchDirection);
@@ -123,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (value.isPressed)
         {
-            // 暂停游戏
             pauseMenu.PauseGame();
         }
     }

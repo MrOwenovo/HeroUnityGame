@@ -31,6 +31,11 @@ public class OrcSword : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.CompareTag("Orc"))
+        {
+            return;
+        }
+
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if (damageable != null)
         {
@@ -38,18 +43,12 @@ public class OrcSword : MonoBehaviour
             Vector2 direction = collider.transform.position - _position;
 
             attackPower = 1;
-            bool isCritical = Random.Range(0, 100) < 30;
-            if (isCritical)
-            {
-                attackPower *= 2;
-            }
+            bool isCritical = false;
             damageable.OnHit(attackPower, direction.normalized * knockbackForce);
-            DamagePopup.Create(collider.transform.position, attackPower ,isCritical);
-            
-            
+            DamagePopup.Create(collider.transform.position, attackPower, isCritical);
         }
-        
     }
+
     // Update is called once per frame
     void Update()
     {

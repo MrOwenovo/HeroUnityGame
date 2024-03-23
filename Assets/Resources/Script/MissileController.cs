@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class MissileController : MonoBehaviour
 {
-    public float speed = 5f; // 导弹的速度
-    private Vector2 moveDirection; // 导弹的移动方向
+    public float speed = 5f;
+    private Vector2 moveDirection;
 
-    // 设置导弹的移动方向
     public void Launch(Vector2 direction)
     {
 
@@ -14,7 +13,6 @@ public class MissileController : MonoBehaviour
 
     private void Update()
     {
-        // 导弹的直线运动
         transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
     }
 
@@ -23,13 +21,12 @@ public class MissileController : MonoBehaviour
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if (damageable != null&&(collision.CompareTag("Player")||collision.CompareTag("Wreckable")) )
         {
-            // 对英雄造成伤害的逻辑
-            damageable.OnHit(1, moveDirection); // 假设伤害值为1
-            Destroy(gameObject); // 销毁导弹
+            damageable.OnHit(1, moveDirection);
+            Destroy(gameObject);
         }
-        else if (collision.CompareTag("Obstacle")) // 假设所有障碍物的 Tag 都设置为 "Obstacle"
+        else if (collision.CompareTag("Obstacle"))
         {
-            Destroy(gameObject); // 如果是障碍物，也销毁导弹
+            Destroy(gameObject);
         }
     }
 }

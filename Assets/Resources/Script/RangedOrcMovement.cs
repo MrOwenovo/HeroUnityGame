@@ -17,12 +17,12 @@ public class RangedOrcMovement : MonoBehaviour
     public float knockbackForce;
     public int attactPower;
 
-    private float nextFireTime = 0f; // 下次发射时间
-    public float fireRate = 1f; // 发射频率，每秒一次
-    public LayerMask obstacleLayer; // 障碍物层
+    private float nextFireTime = 0f;
+    public float fireRate = 1f;
+    public LayerMask obstacleLayer;
     public float idealRange = 5f;
     public float tooCloseRange = 3f;
-    private GameObject target; // 目标（玩家）
+    private GameObject target; 
 
     private void Awake()
     {
@@ -87,7 +87,7 @@ public class RangedOrcMovement : MonoBehaviour
 
     void LaunchMissileTowards(Vector3 targetPosition)
     {
-        Vector3 direction = targetPosition - transform.position; // 计算指向玩家的方向
+        Vector3 direction = targetPosition - transform.position;
         Transform missileTransform = Instantiate(GameAssets.Instance.Missile, transform.position, Quaternion.identity);
         MissileController missileController = missileTransform.GetComponent<MissileController>();
         missileController.Launch(direction);
@@ -126,7 +126,7 @@ public class RangedOrcMovement : MonoBehaviour
     private void MoveEnemy(Vector2 direction)
     {
         
-        float moveSpeed = rangedSpeed * Time.fixedDeltaTime; // 使用 fixedDeltaTime 保证帧率无关
+        float moveSpeed = rangedSpeed * Time.fixedDeltaTime;
         rb.velocity = direction.normalized * moveSpeed;
 
         UpdateAnimation(direction);
@@ -147,7 +147,7 @@ public class RangedOrcMovement : MonoBehaviour
 
     private void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player"); // 查找标记为"Player"的游戏对象
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         target = player;
 
         if (player != null)

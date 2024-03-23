@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: viewRadius
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6254837322873237153, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
+      propertyPath: health
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6500835328923097723, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
       propertyPath: m_Name
       value: Orc Variant
@@ -150,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 6500835328923097723, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
       propertyPath: m_TagString
       value: Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183960947322747016, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

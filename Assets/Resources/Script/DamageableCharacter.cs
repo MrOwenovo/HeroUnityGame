@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class DamageableCharacter : MonoBehaviour ,IDamageable
 {
@@ -14,7 +17,7 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
     private int totalAmount = 2;
     bool isGameWon = true;
     public GameObject failureMenuUI;
-
+    public TextMeshProUGUI healthText;
     
     bool targetable;
     public event Action OnDeath;
@@ -37,6 +40,12 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
             if (health <= 0)
             {
                 gameObject.BroadcastMessage("OnDie");
+                if (gameObject.CompareTag("Player"))
+                {
+                    Debug.Log("player damage");
+                    healthText.text = "Health: " + health.ToString();
+                }
+                OnDeath?.Invoke();
                 var mainUiController = FindObjectOfType<MainController>(); 
                 if (mainUiController != null)
                 {
@@ -64,7 +73,6 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
                 
                 if (totalAmount==0)
                 {
-                    // 假设这里已经有变量 isGameWon 表示游戏是否赢了，gameTime 表示游戏时间，score 表示得分
                     if (isGameWon)
                     {
                         mainUiController.SaveRank();
@@ -81,9 +89,13 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
             else
             {
                 gameObject.BroadcastMessage("OnDamage");
+                if (gameObject.CompareTag("Player"))
+                {
+                    Debug.Log("player damage");
+                    healthText.text = "Health: " + health.ToString();
+                }
             }
             
-            // 更新 HealthDisplay，仅当此 DamageableCharacter 是玩家时
             if (gameObject.CompareTag("Player"))
             {
                 Debug.Log("damage:"+health);
@@ -109,7 +121,7 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
     public void FailureGame()
     {
         failureMenuUI.SetActive(true);
-        Time.timeScale = 0f; // 暂停游戏
+        Time.timeScale = 0f;
     }
     private void Awake()
     {
