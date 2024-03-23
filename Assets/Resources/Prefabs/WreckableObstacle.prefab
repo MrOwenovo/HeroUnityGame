@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3726542251786309056}
   - component: {fileID: 2933022768727452865}
   - component: {fileID: 5201719028662695847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WreckableObstacle
-  m_TagString: Untagged
+  m_TagString: Wreckable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

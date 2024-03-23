@@ -23,8 +23,6 @@ public class DetectionZone : MonoBehaviour
         if (collider != null)
         {
             detectedObjs = collider;
-            
-
         }
     }
 

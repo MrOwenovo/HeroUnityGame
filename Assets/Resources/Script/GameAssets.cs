@@ -22,4 +22,5 @@ public class GameAssets : MonoBehaviour
     public Transform DamagePopup;
     public Transform NonDesObstacle;
     public Transform WreckableObstacle;
+    public Transform Missile;
 }
