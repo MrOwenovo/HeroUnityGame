@@ -45,42 +45,42 @@
 ## ✨ 图片预览
 
 - <figure>
-  <img src="img/6.png" alt="图片描述">
+  <img src="Img/6.png" alt="图片描述">
   <figcaption>主界面</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/7.png" alt="图片描述">
+  <img src="Img/7.png" alt="图片描述">
   <figcaption>关于界面</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/8.png" alt="图片描述">
+  <img src="Img/8.png" alt="图片描述">
   <figcaption>排名界面</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/1.png" alt="图片描述">
+  <img src="Img/1.png" alt="图片描述">
   <figcaption>游戏第一关</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/2.png" alt="图片描述">
+  <img src="Img/2.png" alt="图片描述">
   <figcaption>近战攻击可破坏障碍物</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/3.png" alt="图片描述">
+  <img src="Img/3.png" alt="图片描述">
   <figcaption>遭到攻击</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/4.png" alt="图片描述">
+  <img src="Img/4.png" alt="图片描述">
   <figcaption>敌人和英雄的远程攻击</figcaption>
 </figure>
 
 - <figure>
-  <img src="img/5.png" alt="图片描述">
+  <img src="Img/5.png" alt="图片描述">
   <figcaption>暂停,失败和胜利</figcaption>
 </figure>
 
