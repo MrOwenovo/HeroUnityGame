@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1440
     height: 810
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -123,8 +123,8 @@ MonoBehaviour:
     y: 0
     width: 734.5
     height: 292
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 143
+  controlID: 130
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,8 +177,8 @@ MonoBehaviour:
     y: 0
     width: 299
     height: 760
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -531,7 +531,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Resources/Prefabs
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -539,16 +539,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Resources/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Application\Programming\UnityHub\Projects\2DHero
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c07f0000
-    m_LastClickedID: 32704
-    m_ExpandedIDs: 00000000c07f0000c27f0000c47f0000c67f0000c87f0000ca7f0000cc7f0000ce7f0000d07f0000d27f000000ca9a3b
+    m_SelectedIDs: 10810000
+    m_LastClickedID: 33040
+    m_ExpandedIDs: 00000000ca800000cc800000ce800000d0800000d2800000d4800000d6800000d8800000da800000dc80000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -576,7 +576,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c07f0000c27f0000c47f0000c67f0000c87f0000ca7f0000cc7f0000ce7f0000d07f0000d27f0000
+    m_ExpandedIDs: 00000000ca800000cc800000ce800000d0800000d2800000d4800000d6800000d8800000da800000dc800000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -628,7 +628,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 631}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 175.5
@@ -718,7 +718,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: e4c4fdff2cc5fdff90c7fdffa4c7fdfff6c7fdff18c8fdff74cffdffbccffdff3ad2fdff4ed2fdffa0d2fdffc2d2fdff4ee4fdff80eefdff84f7fdffba00feffec01feff860cfeffd80cfeff600ffeff820ffeffdc0ffeff0610feff4411feffc211feff1212feff5e12feff6418feff7818feffda18fefffa36fefffe3afeff145bfeffe2d2feffb806ffffc206ffff6026ffff2c4dffff2e4dffffe854ffffec54ffff2a8cffffae8cfffffafaffff546b00008a6b0000966b0000a46b0000e26b0000006c000076aa000088aa0000c6aa0000daaa00000aab00001cab00009cab0000fcab0000d8c6000028db00008cdb00004edc0000dce700002ee80000fce800004ee9000042ea000056ea00002eeb00004ceb000064ec0000b6ec000078ed000094ed0000d8ed000052f7000026f80000
+      m_ExpandedIDs: c0dbffff18dcffff96deffffaadefffffcdeffff1edfffff40f9fffffafaffffa4810000ae810000b8810000c2810000de810000e8810000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1052,7 +1052,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 48, y: 48}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 366.75, y: 134, z: -0.19101563}
     speed: 2
-    m_Value: {x: 366.74997, y: 134, z: -0.19101597}
+    m_Value: {x: 366.75, y: 134, z: -0.19101563}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 390.46332
     speed: 2
-    m_Value: 390.46335
+    m_Value: 390.46332
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_SerializedViewValues:
   - C:\Application\Programming\UnityHub\Projects\2DGame\Library\PlayModeViewStates\72bc662d55ae682418aea229ef05bfe9
   m_PlayModeViewName: GameView
-  m_ShowGizmos: 1
+  m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
   m_TargetSize: {x: 733.5, y: 426}
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
-  m_Gizmos: 1
+  m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
