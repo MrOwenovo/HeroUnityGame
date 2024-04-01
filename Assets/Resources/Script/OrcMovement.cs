@@ -16,7 +16,7 @@ public class OrcMovement : MonoBehaviour
     public int attactPower;
     public LayerMask obstacleLayer;
 
-    
+    private bool isCooldown = false; 
 
 
     private void Awake()
@@ -40,9 +40,11 @@ public class OrcMovement : MonoBehaviour
             Vector2 direction = collider.transform.position - transform.position;
             Vector2 force = direction.normalized * knockbackForce;
             
-            OnFire();
-            // damageable.OnHit(attactPower, force);
-    
+            if (!isCooldown) 
+            {
+                OnFire();
+                // damageable.OnHit(attactPower, force);
+            }
         }
     }
 
@@ -58,7 +60,15 @@ public class OrcMovement : MonoBehaviour
     void OnFire()
     {
         animator.SetTrigger("swordAttack");
+        StartCoroutine(AttackCooldown());
     }
+    IEnumerator AttackCooldown()
+    {
+        isCooldown = true; 
+        yield return new WaitForSeconds(2); 
+        isCooldown = false; 
+    }
+
     public void OnDamage()
     {
         animator.SetTrigger("isDamage");
@@ -124,9 +134,31 @@ public class OrcMovement : MonoBehaviour
         {
             OnWalkStop();
         }
+
+        // Check if you need to avoid missiles
+        if (GetComponent<MissileDetectionZone>().detectedMissile != null)
+        {
+            Collider2D missileCollider = GetComponent<MissileDetectionZone>().detectedMissile;
+            Vector2 dodgeDirection = Vector2.Perpendicular((Vector2)transform.position - (Vector2)missileCollider.transform.position).normalized;
+        
+            // Perform evasive actions, such as changing the current direction of movement
+            DodgeMissile(dodgeDirection);
+        }
     }
 
-
+    void DodgeMissile(Vector2 dodgeDirection)
+    {
+        float dodgeSpeed = 5f;
+        rb.velocity = dodgeDirection * dodgeSpeed;
+        StartCoroutine(ResetDodge());
+    }
+    
+    IEnumerator ResetDodge()
+    {
+        yield return new WaitForSeconds(1f);
+        rb.velocity = Vector2.zero; 
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

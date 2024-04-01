@@ -165,10 +165,35 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4573176605125146653, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6461274026418740436}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6500835328923097723, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7709208375652289300}
   m_SourcePrefab: {fileID: 100100000, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
 --- !u!4 &1235188529694919674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4573176605125146653, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
   m_PrefabInstance: {fileID: 3338128884993766375}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8387094217557764508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6500835328923097723, guid: 3867ece073c986d4d91dc1fc167f4411, type: 3}
+  m_PrefabInstance: {fileID: 3338128884993766375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7709208375652289300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387094217557764508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7092455bfddc487f83f14916ee5a98d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedMissile: {fileID: 5648053835492443862, guid: f10cfeaacfda3874ea8e69fa8de090e5, type: 3}
+  detectionRadius: 5
+  missileLayerMask:
+    serializedVersion: 2
+    m_Bits: 512

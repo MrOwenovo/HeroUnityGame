@@ -128,6 +128,15 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
         rb = GetComponent<Rigidbody2D>();
         physicsCollider = GetComponent<Collider2D>();
         
+        EnemyManager.OnRoundTwoStart += HandleRoundTwoStart;
+    }
+    private void HandleRoundTwoStart()
+    {
+        if (gameObject.CompareTag("Player"))
+        {
+            Health = 30;
+            healthText.text = "Health: " + health.ToString();
+        }
     }
 
     public void OnDying()
@@ -147,5 +156,10 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
     public void OnObjectDestroyed()
     {
         Destroy(gameObject);
+    }
+    private void OnDestroy()
+    {
+        // 不要忘记在对象销毁时取消订阅，避免内存泄漏
+        EnemyManager.OnRoundTwoStart -= HandleRoundTwoStart;
     }
 }

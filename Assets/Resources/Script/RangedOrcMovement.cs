@@ -23,6 +23,8 @@ public class RangedOrcMovement : MonoBehaviour
     public float idealRange = 5f;
     public float tooCloseRange = 3f;
     private GameObject target; 
+    
+    private bool isCooldown = false; 
 
     private void Awake()
     {
@@ -43,8 +45,11 @@ public class RangedOrcMovement : MonoBehaviour
             Vector2 direction = collider.transform.position - transform.position;
             Vector2 force = direction.normalized * knockbackForce;
 
-            OnFire();
-            // damageable.OnHit(attactPower, force);
+            if (!isCooldown) 
+            {
+                OnFire();
+                // damageable.OnHit(attactPower, force);
+            }
         }
     }
 
@@ -61,7 +66,13 @@ public class RangedOrcMovement : MonoBehaviour
     void OnFire()
     {
         animator.SetTrigger("swordAttack");
-        // LaunchMissileTowards(transform.position);
+        StartCoroutine(AttackCooldown());
+    }
+    IEnumerator AttackCooldown()
+    {
+        isCooldown = true; 
+        yield return new WaitForSeconds(2); 
+        isCooldown = false; 
     }
 
 
@@ -92,7 +103,7 @@ public class RangedOrcMovement : MonoBehaviour
         MissileController missileController = missileTransform.GetComponent<MissileController>();
         missileController.Launch(direction);
     }
-
+   
     private void MaintainDistanceFromTarget()
     {
         if (target == null) return;
@@ -119,8 +130,18 @@ public class RangedOrcMovement : MonoBehaviour
             // There is an obstacle in the way, find a new direction to move
             moveDirection += hit.normal * rangedSpeed;
         }
+        
+        if (GetComponent<MissileDetectionZone>().detectedMissile != null)
+        {
+            Collider2D missileCollider = GetComponent<MissileDetectionZone>().detectedMissile;
+            Vector2 dodgeDirection = Vector2.Perpendicular((Vector2)transform.position - (Vector2)missileCollider.transform.position).normalized;
+        
+            moveDirection = dodgeDirection;
+        }
 
         MoveEnemy(moveDirection);
+        
+        
     }
 
     private void MoveEnemy(Vector2 direction)

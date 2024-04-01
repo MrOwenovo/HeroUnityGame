@@ -134,6 +134,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 500
+  playerMissilePrefab: {fileID: 5982230383359858080, guid: f10cfeaacfda3874ea8e69fa8de090e5, type: 3}
+  meleeCooldownTime: 2
+  missileCooldownTime: 0.5
+  meleeCooldown: 0
+  missileCooldown: 0
 --- !u!50 &4935200707075203172
 Rigidbody2D:
   serializedVersion: 4
@@ -230,6 +235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  enemyType: 0
+  failureMenuUI: {fileID: 0}
+  healthText: {fileID: 0}
 --- !u!1 &5688433504481358448
 GameObject:
   m_ObjectHideFlags: 0

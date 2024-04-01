@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
     public float spawnRadius = 9.5f;
     public LayerMask obstacleLayer;
-    private float gameTimer = 30f;
+    private float gameTimer = 7f;
     
     public GameObject rangedEnemyPrefab;
     private int currentMeleeEnemies = 0;
@@ -19,6 +20,8 @@ public class EnemyManager : MonoBehaviour
     private int round = 1;
     
     public GameObject winMenuUI;
+    public TextMeshProUGUI healthText;
+
    
     public void WinGame()
     {
@@ -76,6 +79,7 @@ public class EnemyManager : MonoBehaviour
     void StartRoundTwo()
     {
         ClearEnemies(); 
+        
 
         ObstacleSpawner obstacleSpawner = FindObjectOfType<ObstacleSpawner>();
         if (obstacleSpawner != null)
@@ -99,15 +103,20 @@ public class EnemyManager : MonoBehaviour
 
         ResetPlayerHealth();
     }
-
+    public static event Action OnRoundTwoStart;
     void ResetPlayerHealth()
     {
+        Debug.Log("reset health!!!");
+        OnRoundTwoStart?.Invoke();
+        
         DamageableCharacter player = FindObjectOfType<DamageableCharacter>();
         if (player != null && player.CompareTag("Player"))
         {
             player.Health = 30;
             player.health = 30;
             HealthDisplay.UpdateHealth(30);
+
+            healthText.text = "Health: " + 30;
         }
     }
 

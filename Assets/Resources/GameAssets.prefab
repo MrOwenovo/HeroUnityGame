@@ -48,3 +48,4 @@ MonoBehaviour:
   NonDesObstacle: {fileID: 7000334152396015750, guid: c31f9609309adf64d8eaa8c9159ae79a, type: 3}
   WreckableObstacle: {fileID: 3562551259387248590, guid: 0c5ae544a41a1604896fb10e964be58a, type: 3}
   Missile: {fileID: 6204960740897415315, guid: 296275809e527864da9cfe988bf8125b, type: 3}
+  PlayerMissile: {fileID: 6204960740897415315, guid: f10cfeaacfda3874ea8e69fa8de090e5, type: 3}
