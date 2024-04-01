@@ -98,6 +98,17 @@ public class RangedOrcMovement : MonoBehaviour
 
     void LaunchMissileTowards(Vector3 targetPosition)
     {
+        if (GameDifficulty.CurrentDifficulty == GameDifficulty.Difficulty.Easy)
+        {
+            fireRate = 0.5f; 
+            rangedSpeed = 2.5f; 
+        }
+        else
+        {
+            fireRate = 1f; 
+            rangedSpeed = 5f; 
+        }
+        
         Vector3 direction = targetPosition - transform.position;
         Transform missileTransform = Instantiate(GameAssets.Instance.Missile, transform.position, Quaternion.identity);
         MissileController missileController = missileTransform.GetComponent<MissileController>();
@@ -106,6 +117,11 @@ public class RangedOrcMovement : MonoBehaviour
    
     private void MaintainDistanceFromTarget()
     {
+        
+        if (GameDifficulty.CurrentDifficulty == GameDifficulty.Difficulty.Easy)
+        {
+            return; // easy
+        }
         if (target == null) return;
 
         float distanceToTarget = Vector2.Distance(transform.position, target.transform.position);

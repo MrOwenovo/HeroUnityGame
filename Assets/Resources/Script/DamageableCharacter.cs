@@ -37,6 +37,11 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
         {
             health = value;
             
+            if (gameObject.CompareTag("Wreckable") && GameDifficulty.CurrentDifficulty == GameDifficulty.Difficulty.Easy)
+            {
+                health = 1; //easy
+            }
+            
             if (health <= 0)
             {
                 gameObject.BroadcastMessage("OnDie");
@@ -129,6 +134,7 @@ public class DamageableCharacter : MonoBehaviour ,IDamageable
         physicsCollider = GetComponent<Collider2D>();
         
         EnemyManager.OnRoundTwoStart += HandleRoundTwoStart;
+        PauseMenu.resetHealth += HandleRoundTwoStart;
     }
     private void HandleRoundTwoStart()
     {

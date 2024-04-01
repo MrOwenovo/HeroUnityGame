@@ -135,15 +135,19 @@ public class OrcMovement : MonoBehaviour
             OnWalkStop();
         }
 
-        // Check if you need to avoid missiles
-        if (GetComponent<MissileDetectionZone>().detectedMissile != null)
+        if (!(GameDifficulty.CurrentDifficulty == GameDifficulty.Difficulty.Easy))
         {
-            Collider2D missileCollider = GetComponent<MissileDetectionZone>().detectedMissile;
-            Vector2 dodgeDirection = Vector2.Perpendicular((Vector2)transform.position - (Vector2)missileCollider.transform.position).normalized;
+            // Check if you need to avoid missiles
+            if (GetComponent<MissileDetectionZone>().detectedMissile != null)
+            {
+                Collider2D missileCollider = GetComponent<MissileDetectionZone>().detectedMissile;
+                Vector2 dodgeDirection = Vector2.Perpendicular((Vector2)transform.position - (Vector2)missileCollider.transform.position).normalized;
         
-            // Perform evasive actions, such as changing the current direction of movement
-            DodgeMissile(dodgeDirection);
+                // Perform evasive actions, such as changing the current direction of movement
+                DodgeMissile(dodgeDirection);
+            }
         }
+        
     }
 
     void DodgeMissile(Vector2 dodgeDirection)
