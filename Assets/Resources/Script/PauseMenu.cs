@@ -23,22 +23,28 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("reset health!!!");
-        resetHealth?.Invoke();
+        Time.timeScale = 1f;
+        // 注册场景加载完成后的回调
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        // 重载当前场景
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    // 场景加载完成后执行的回调方法
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 找到玩家并重置健康状态
         DamageableCharacter player = FindObjectOfType<DamageableCharacter>();
         if (player != null && player.CompareTag("Player"))
         {
             player.Health = 30;
             player.health = 30;
             HealthDisplay.UpdateHealth(30);
-
             healthText.text = "Health: " + 30;
         }
-        
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // 移除事件监听，避免重复调用
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
 
     public void LoadMainMenu()
     {
