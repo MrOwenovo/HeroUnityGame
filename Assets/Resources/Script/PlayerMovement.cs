@@ -21,12 +21,14 @@ public class PlayerMovement : MonoBehaviour
     public float meleeCooldown;
     public float missileCooldown;
 
+    public AudioSource audioSource;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+        audioSource = GetComponent<AudioSource>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         
         
@@ -71,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if ( meleeCooldown <= 0)
         {
+            
             animator.SetTrigger("swordAttack");
             meleeCooldown = meleeCooldownTime;
         }
@@ -105,6 +108,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (value.isPressed && missileCooldown <= 0)
         {
+            audioSource.clip = Resources.Load<AudioClip>("Sound/fire");
+            audioSource.Play();
             LaunchMissile(lastMoveDirection);
             missileCooldown = missileCooldownTime;
         }

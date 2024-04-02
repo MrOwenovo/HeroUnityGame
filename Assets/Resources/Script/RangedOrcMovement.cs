@@ -25,14 +25,14 @@ public class RangedOrcMovement : MonoBehaviour
     private GameObject target; 
     
     private bool isCooldown = false; 
-
+    public AudioSource audioSource;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rangedDetectionZone = GetComponent<RangedDetectionZone>();
-
+        audioSource = GetComponent<AudioSource>(); 
         // transform.Find("DetectZone").GetComponent<DetectionZone>();
     }
 
@@ -108,6 +108,9 @@ public class RangedOrcMovement : MonoBehaviour
             fireRate = 1f; 
             rangedSpeed = 5f; 
         }
+        
+        audioSource.clip = Resources.Load<AudioClip>("Sound/fire");
+        audioSource.Play();
         
         Vector3 direction = targetPosition - transform.position;
         Transform missileTransform = Instantiate(GameAssets.Instance.Missile, transform.position, Quaternion.identity);

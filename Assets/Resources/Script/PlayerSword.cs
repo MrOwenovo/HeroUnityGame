@@ -8,9 +8,12 @@ public class PlayerSword : MonoBehaviour
     private int attackPower;
     public int knockbackForce;
     
+    public AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         position = transform.localPosition;
     }
 
@@ -31,6 +34,9 @@ public class PlayerSword : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        audioSource.clip = Resources.Load<AudioClip>("Sound/sword");
+        audioSource.Play();
+        
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if (damageable != null)
         {

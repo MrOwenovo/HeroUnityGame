@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
     public float spawnRadius = 9.5f;
     public LayerMask obstacleLayer;
-    private float gameTimer = 7f;
+    private float gameTimer = 30f;
     
     public GameObject rangedEnemyPrefab;
     private int currentMeleeEnemies = 0;
@@ -21,6 +21,7 @@ public class EnemyManager : MonoBehaviour
     
     public GameObject winMenuUI;
     public TextMeshProUGUI healthText;
+    public AudioSource audioSource;
 
    
     public void WinGame()
@@ -41,6 +42,9 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>(); 
+        audioSource.clip = Resources.Load<AudioClip>("Sound/music");
+        audioSource.Play();
         StartCoroutine(GameRound());
     }
     IEnumerator GameRound()
